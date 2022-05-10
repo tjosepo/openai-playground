@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "start": "deno run -A --watch --no-check main.ts",
+    "manifest": "deno run -A --no-check https://raw.githubusercontent.com/lucacasonato/fresh/main/cli.ts manifest"
+  }
+}
