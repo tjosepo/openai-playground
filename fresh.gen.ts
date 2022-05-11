@@ -2,19 +2,19 @@
 // This file SHOULD be checked into source version control.
 // To update this file, run `fresh manifest`.
 
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
+import * as $0 from "./routes/_render.ts";
+import * as $1 from "./routes/api/prompt.ts";
 import * as $2 from "./routes/index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
+import * as $$0 from "./islands/App.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
+    "./routes/_render.ts": $0,
+    "./routes/api/prompt.ts": $1,
     "./routes/index.tsx": $2,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
+    "./islands/App.tsx": $$0,
   },
   baseUrl: import.meta.url,
 };
