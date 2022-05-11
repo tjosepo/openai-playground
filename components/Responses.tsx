@@ -7,12 +7,14 @@ export default function Responses() {
   return (
     <div class={tw`h-full flex flex-col`}>
       <div
-        class={tw`h-16 px-5 flex items-center justify-between bg-gray-100 border-t border-r border-b border-gray-200`}
+        class={tw
+          `h-16 px-5 flex items-center justify-between bg-gray-100 border-t border-r border-b border-gray-200`}
       >
         <p class={tw`font-medium text-xl`}>Responses</p>
       </div>
       <div
-        class={tw`flex-grow sm:max-h-[calc(100vh-8rem)] flex flex-col p-4 gap-4 overflow-y-scroll`}
+        class={tw
+          `flex-grow sm:max-h-[calc(100vh-8rem)] flex flex-col p-4 gap-4 overflow-y-scroll`}
       >
         {responses.map((response) => (
           <div

@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "../deps/client.ts";
-import { PromptResponse, OpenAIEngine } from "../types.ts";
+import { OpenAIEngine, PromptResponse } from "../types.ts";
 
 export interface AppContext {
   addResponse(res: PromptResponse): void;
@@ -42,7 +42,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   useEffect(() => {
     const engine = window.localStorage.getItem(
-      "open_ai_engine"
+      "open_ai_engine",
     ) as OpenAIEngine;
     if (!engine) return;
     setEngine(engine);
@@ -52,7 +52,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     setResponses((prevRes) => {
       window.localStorage.setItem(
         "open_ai_responses",
-        JSON.stringify([res, ...prevRes])
+        JSON.stringify([res, ...prevRes]),
       );
       return [res, ...prevRes];
     });
@@ -72,7 +72,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
           engine,
           setEngine,
         }),
-        [responses, engine]
+        [responses, engine],
       )}
     >
       {children}

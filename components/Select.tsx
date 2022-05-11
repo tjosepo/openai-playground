@@ -15,7 +15,8 @@ export default function Input({ label, id }: InputProps) {
         </label>
       )}
       <input
-        class={tw`flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
+        class={tw
+          `flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
       />
     </div>
   );

@@ -23,22 +23,26 @@ export default function Input({
           {label}
         </label>
       )}
-      {type === "select" ? (
-        <select
-          id={id}
-          {...props}
-          class={tw`flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
-        >
-          {children}
-        </select>
-      ) : (
-        <input
-          id={id}
-          type={type}
-          {...props}
-          class={tw`flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
-        />
-      )}
+      {type === "select"
+        ? (
+          <select
+            id={id}
+            {...props}
+            class={tw
+              `flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
+          >
+            {children}
+          </select>
+        )
+        : (
+          <input
+            id={id}
+            type={type}
+            {...props}
+            class={tw
+              `flex-grow px-4 py-2 border rounded border-gray-200 outline-none focus:border-black focus:shadow`}
+          />
+        )}
     </div>
   );
 }
