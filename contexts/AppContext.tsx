@@ -12,6 +12,7 @@ import { OpenAIEngine, PromptResponse } from "../types.ts";
 
 export interface AppContext {
   addResponse(res: PromptResponse): void;
+  clearResponses(): void;
   responses: PromptResponse[];
   setEngine(engine: OpenAIEngine): void;
   engine: string;
@@ -20,6 +21,7 @@ export interface AppContext {
 const AppContext = createContext<AppContext>({
   responses: [],
   addResponse() {},
+  clearResponses() {},
   engine: "text-curie-001",
   setEngine() {},
 });
@@ -42,7 +44,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   useEffect(() => {
     const engine = window.localStorage.getItem(
-      "open_ai_engine",
+      "open_ai_engine"
     ) as OpenAIEngine;
     if (!engine) return;
     setEngine(engine);
@@ -52,9 +54,16 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     setResponses((prevRes) => {
       window.localStorage.setItem(
         "open_ai_responses",
-        JSON.stringify([res, ...prevRes]),
+        JSON.stringify([res, ...prevRes])
       );
       return [res, ...prevRes];
+    });
+  }, []);
+
+  const clearResponses = useCallback(() => {
+    setResponses(() => {
+      window.localStorage.removeItem("open_ai_responses");
+      return [];
     });
   }, []);
 
@@ -69,10 +78,11 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         () => ({
           responses,
           addResponse,
+          clearResponses,
           engine,
           setEngine,
         }),
-        [responses, engine],
+        [responses, engine]
       )}
     >
       {children}

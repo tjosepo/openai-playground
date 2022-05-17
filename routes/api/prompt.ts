@@ -4,11 +4,11 @@ import "https://deno.land/std@0.138.0/dotenv/load.ts";
 const OPENAI_KEY = Deno.env.get("OPENAI_KEY");
 
 export const handler = async (req: Request): Promise<Response> => {
-  let prompt;
+  let prompt, engine;
   try {
-    ({ prompt } = await req.json());
+    ({ prompt, engine } = await req.json());
   } catch {
-    return new Response("Bad Request", { status: 401 });
+    return new Response("Bad Request", { status: 400 });
   }
 
   const data = {
@@ -21,7 +21,7 @@ export const handler = async (req: Request): Promise<Response> => {
   };
 
   const res = await fetch(
-    "https://api.openai.com/v1/engines/text-curie-001/completions",
+    `https://api.openai.com/v1/engines/${engine}/completions`,
     {
       method: "POST",
       headers: {
@@ -29,8 +29,12 @@ export const handler = async (req: Request): Promise<Response> => {
         Authorization: `Bearer ${OPENAI_KEY}`,
       },
       body: JSON.stringify(data),
-    },
+    }
   );
+
+  if (!res.ok) {
+    return new Response("Bad Request", { status: 400 });
+  }
 
   const result = (await res.json()) as OpenAIResult;
 
